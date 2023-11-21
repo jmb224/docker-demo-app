@@ -41,19 +41,16 @@
         font-size: 15px;
     }
 </style>
-<script>
+<script text="javascript">
     (async function init() {
         const response = await fetch('http://localhost:3000/get-profile');
-        console.log("response", response);
-        const user = await response.json();
-        console.log(JSON.stringify(user));
+        const { name, email, interests } = await response.json();
 
-        document.getElementById('name').textContent = user.name ? user.name : 'Anna Smith';
-        document.getElementById('email').textContent = user.email ? user.email : 'anna.smith@example.com';
-        document.getElementById('interests').textContent = user.interests ? user.interests : 'coding';
+        document.getElementById('name').textContent = name || 'Julio Quina';
+        document.getElementById('email').textContent = email || 'julio.quina@example.com';
+        document.getElementById('interests').textContent = interests || 'coding';
+        document.getElementById('container').style.display = 'block';
 
-        const cont = document.getElementById('container');
-        cont.style.display = 'block';
     })();
 
     async function handleUpdateProfileRequest() {
